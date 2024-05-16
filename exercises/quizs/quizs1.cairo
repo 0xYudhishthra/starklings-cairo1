@@ -4,12 +4,21 @@
 // Write a function that calculates the price of an order of apples given
 // the quantity bought. No hints this time!
 
-// I AM NOT DONE
+
+fn main() {
+    verify_test();
+}
 
 // Put your function here!
-// fn calculate_price_of_apples{
-
-// }
+fn calculate_price_of_apples (apple_quantity: u128) -> u128{
+    let mut price = 0;
+    if apple_quantity > 40 {
+        price = apple_quantity * 2;
+    } else {
+        price = apple_quantity * 3;
+    }
+    return price;
+}
 
 // Do not change the tests!
 #[test]

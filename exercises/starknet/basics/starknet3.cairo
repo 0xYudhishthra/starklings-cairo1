@@ -5,7 +5,6 @@
 // only the owner to update the contract, they agree.
 // Can you help them write this contract?
 
-// I AM NOT DONE
 
 use starknet::ContractAddress;
 
@@ -25,7 +24,7 @@ mod ProgressTracker {
     struct Storage {
         contract_owner: ContractAddress,
         // TODO: Set types for LegacyMap
-        progress: LegacyMap<>
+        progress: LegacyMap<ContractAddress, u16>,
     }
 
     #[constructor]
@@ -40,9 +39,16 @@ mod ProgressTracker {
             ref self: ContractState, user: ContractAddress, new_progress: u16
         ) { // TODO: assert owner is calling
         // TODO: set new_progress for user,
+        let address = get_caller_address();
+        if address != self.contract_owner.read() {
+            panic!("Only the owner can update the progress");
+        }
+        self.progress.write(user, new_progress);
         }
 
         fn get_progress(self: @ContractState, user: ContractAddress) -> u16 { // Get user progress
+            let progress = self.progress.read(user);
+            progress
         }
 
         fn get_contract_owner(self: @ContractState) -> ContractAddress {

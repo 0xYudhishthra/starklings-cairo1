@@ -5,17 +5,17 @@
 use array::ArrayTrait;
 use debug::PrintTrait;
 
-// I AM NOT DONE
-
 fn main() {
     let arr0 = ArrayTrait::new();
+    let arr0_copy = arr0.clone();
 
-    let mut _arr1 = fill_arr(arr0);
+    let mut _arr1 = fill_arr(arr0_copy);
 
     // Do not change the following line!
     arr0.print();
 }
 
+#[derive(Copy, Drop)]
 fn fill_arr(arr: Array<felt252>) -> Array<felt252> {
     let mut arr = arr;
 
